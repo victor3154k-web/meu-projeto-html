@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login com Senha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #333;
+            padding: 30px 50px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Área Restrita</h1>
+        <p>Digite a senha para acessar o conteúdo:</p>
+
+        <input type="password" id="senhaInput" placeholder="Digite a senha">
+        <button id="entrarBtn">Entrar</button>
+
+        <div id="mensagem"></div>
+    </div>
+
+    <script>
+        document.getElementById("entrarBtn").addEventListener("click", function() {
+            const senhaCorreta = "1234"; // altere aqui para sua senha
+            const input = document.getElementById("senhaInput").value;
+            const mensagem = document.getElementById("mensagem");
+
+            if(input === senhaCorreta) {
+                mensagem.style.color = "green";
+                mensagem.innerText = "Senha correta! Abrindo nova aba...";
+
+                // Abrir a página restrita em nova aba
+                window.open("pagina_restrita.html", "_blank");
+            } else {
+                mensagem.style.color = "red";
+                mensagem.innerText = "Senha incorreta! Tente novamente.";
+            }
+        });
+    </script>
+</body>
+</html>
