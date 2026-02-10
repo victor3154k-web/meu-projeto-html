@@ -3,102 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Página Restrita LED</title>
+<title>Página Restrita Boate LED</title>
 <style>
 body {
     margin: 0;
     height: 100vh;
-    background-color: #000;
+    background: radial-gradient(circle at center, #000000 0%, #111111 100%);
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
     color: #fff;
-    overflow: hidden;
 }
 
+/* Container central */
 .container {
     text-align: center;
+    z-index: 10;
 }
 
+/* Título com neon animado */
 h1 {
     font-size: 3rem;
+    font-weight: bold;
     color: #ff00ff;
-    text-shadow:
+    text-shadow: 
         0 0 5px #ff00ff,
         0 0 10px #ff00ff,
         0 0 20px #ff00ff,
-        0 0 40px #ff00ff,
-        0 0 80px #ff00ff;
-    animation: flicker 2s infinite;
+        0 0 40px #ff00ff;
+    animation: neon 1.5s infinite alternate;
 }
 
+/* Texto secundário neon azul */
 p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #0ff;
     text-shadow:
         0 0 5px #0ff,
-        0 0 10px #0ff;
-    margin-top: 20px;
+        0 0 10px #0ff,
+        0 0 20px #0ff;
+    animation: neonBlue 1.8s infinite alternate;
+    margin-top: 15px;
 }
 
+/* Botão neon */
 button {
-    padding: 10px 20px;
+    padding: 15px 30px;
     margin-top: 30px;
-    font-size: 16px;
-    border-radius: 8px;
+    font-size: 18px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     background-color: #ff00ff;
     color: #000;
     box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
     transition: 0.3s;
+    animation: pulse 1.5s infinite alternate;
 }
 
 button:hover {
-    box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff;
+    box-shadow: 0 0 40px #ff00ff, 0 0 80px #ff00ff;
     transform: scale(1.1);
 }
 
-/* Animação de flicker LED */
-@keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {opacity: 1;}
-    20%, 22%, 24%, 55% {opacity: 0.4;}
+/* Animações neon */
+@keyframes neon {
+    from { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
+    to { text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff; }
 }
 
-/* Fundo animado tipo luzes piscando */
+@keyframes neonBlue {
+    from { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; }
+    to { text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff; }
+}
+
+@keyframes pulse {
+    from { box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+    to { box-shadow: 0 0 50px #ff00ff, 0 0 100px #ff00ff; }
+}
+
+/* Partículas estilo boate */
 .star {
     position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #0ff;
     border-radius: 50%;
-    animation: twinkle 3s infinite;
+    opacity: 0.7;
+    animation: twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle {
-    0%, 100% {opacity: 1;}
-    50% {opacity: 0.3;}
+    from { opacity: 0.3; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1.5); }
 }
 </style>
 </head>
 <body>
 <div class="container">
     <h1>ACESSO LIBERADO</h1>
-    <p>Bem-vindo à Área Restrita LED!</p>
+    <p>Bem-vindo à Área Boate LED!</p>
     <button onclick="window.close()">Fechar aba</button>
 </div>
 
 <script>
-// Cria várias "estrelas" piscando no fundo
-for(let i=0; i<50; i++) {
+// Cria partículas neon coloridas
+const colors = ['#ff00ff','#0ff','#ff0055','#00ff99','#ffff00','#ff5500'];
+for(let i=0;i<80;i++){
     const star = document.createElement('div');
     star.className = 'star';
+    star.style.width = star.style.height = Math.random()*4 + 2 + 'px';
     star.style.top = Math.random()*100 + 'vh';
     star.style.left = Math.random()*100 + 'vw';
-    star.style.width = Math.random()*3 + 1 + 'px';
-    star.style.height = star.style.width;
-    star.style.animationDuration = (Math.random()*3 + 2) + 's';
+    star.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+    star.style.animationDuration = (Math.random()*3 + 2)+'s';
     document.body.appendChild(star);
 }
 </script>
