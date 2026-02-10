@@ -3,52 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Página Restrita Boate LED</title>
+<title>Área Boate LED</title>
 <style>
 body {
     margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at center, #000000 0%, #111111 100%);
+    padding: 0;
     overflow: hidden;
+    height: 100vh;
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
-    color: #fff;
 }
 
 /* Container central */
 .container {
+    position: relative;
     text-align: center;
     z-index: 10;
 }
 
-/* Título com neon animado */
+/* Título neon animado com múltiplas cores */
 h1 {
     font-size: 3rem;
     font-weight: bold;
     color: #ff00ff;
-    text-shadow: 
-        0 0 5px #ff00ff,
-        0 0 10px #ff00ff,
-        0 0 20px #ff00ff,
-        0 0 40px #ff00ff;
-    animation: neon 1.5s infinite alternate;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+    animation: neonColors 3s infinite alternate;
 }
 
-/* Texto secundário neon azul */
+/* Texto secundário neon */
 p {
     font-size: 1.5rem;
     color: #0ff;
-    text-shadow:
-        0 0 5px #0ff,
-        0 0 10px #0ff,
-        0 0 20px #0ff;
-    animation: neonBlue 1.8s infinite alternate;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    animation: neonColors2 4s infinite alternate;
     margin-top: 15px;
 }
 
-/* Botão neon */
+/* Botão neon pulsante com várias cores */
 button {
     padding: 15px 30px;
     margin-top: 30px;
@@ -56,45 +50,54 @@ button {
     border-radius: 12px;
     border: none;
     cursor: pointer;
-    background-color: #ff00ff;
     color: #000;
+    animation: buttonColors 2s infinite alternate;
     box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
     transition: 0.3s;
-    animation: pulse 1.5s infinite alternate;
 }
 
 button:hover {
-    box-shadow: 0 0 40px #ff00ff, 0 0 80px #ff00ff;
     transform: scale(1.1);
+    box-shadow: 0 0 60px #fff, 0 0 120px #fff;
 }
 
-/* Animações neon */
-@keyframes neon {
-    from { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
-    to { text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff; }
+/* Animações de cores */
+@keyframes neonColors {
+    0% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
+    25% { color: #00ffea; text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea; }
+    50% { color: #ff0055; text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; }
+    75% { color: #ffff00; text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
+    100% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; }
 }
 
-@keyframes neonBlue {
-    from { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; }
-    to { text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff; }
+@keyframes neonColors2 {
+    0% { color: #0ff; text-shadow: 0 0 10px #0ff,0 0 20px #0ff; }
+    25% { color: #ff0; text-shadow: 0 0 10px #ff0,0 0 20px #ff0; }
+    50% { color: #f0f; text-shadow: 0 0 10px #f0f,0 0 20px #f0f; }
+    75% { color: #0f0; text-shadow: 0 0 10px #0f0,0 0 20px #0f0; }
+    100% { color: #0ff; text-shadow: 0 0 10px #0ff,0 0 20px #0ff; }
 }
 
-@keyframes pulse {
-    from { box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
-    to { box-shadow: 0 0 50px #ff00ff, 0 0 100px #ff00ff; }
+@keyframes buttonColors {
+    0% { background-color: #ff00ff; box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+    25% { background-color: #00ffea; box-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea; }
+    50% { background-color: #ff0055; box-shadow: 0 0 20px #ff0055, 0 0 40px #ff0055; }
+    75% { background-color: #ffff00; box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00; }
+    100% { background-color: #ff00ff; box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
 }
 
-/* Partículas estilo boate */
+/* Partículas neon animadas */
 .star {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.7;
-    animation: twinkle 3s infinite alternate;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out;
 }
 
 @keyframes twinkle {
-    from { opacity: 0.3; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1.5); }
+    0% { transform: translate(0,0) scale(0.5); opacity: 0.3; }
+    50% { transform: translate(calc(var(--x)*1px), calc(var(--y)*1px)) scale(1.5); opacity: 1; }
+    100% { transform: translate(0,0) scale(0.5); opacity: 0.3; }
 }
 </style>
 </head>
@@ -106,16 +109,19 @@ button:hover {
 </div>
 
 <script>
-// Cria partículas neon coloridas
-const colors = ['#ff00ff','#0ff','#ff0055','#00ff99','#ffff00','#ff5500'];
-for(let i=0;i<80;i++){
+// Cria partículas neon com movimento aleatório
+const colors = ['#ff00ff','#0ff','#ff0055','#00ff99','#ffff00','#ff5500','#00ffff','#ff5500','#ff0','#f0f'];
+for(let i=0;i<100;i++){
     const star = document.createElement('div');
     star.className = 'star';
     star.style.width = star.style.height = Math.random()*4 + 2 + 'px';
     star.style.top = Math.random()*100 + 'vh';
     star.style.left = Math.random()*100 + 'vw';
     star.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-    star.style.animationDuration = (Math.random()*3 + 2)+'s';
+    // Define movimento aleatório para cada partícula
+    star.style.setProperty('--x', (Math.random()*200-100).toFixed(2));
+    star.style.setProperty('--y', (Math.random()*200-100).toFixed(2));
+    star.style.animationDuration = (Math.random()*4 + 2)+'s';
     document.body.appendChild(star);
 }
 </script>
