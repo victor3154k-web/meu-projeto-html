@@ -1,43 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Restrita</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página Restrita LED</title>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    overflow: hidden;
+}
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-top: 20px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            background-color: #ffcc00;
-            color: #000;
-        }
+.container {
+    text-align: center;
+}
 
-        button:hover {
-            background-color: #ffd633;
-        }
-    </style>
+h1 {
+    font-size: 3rem;
+    color: #ff00ff;
+    text-shadow:
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 80px #ff00ff;
+    animation: flicker 2s infinite;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #0ff;
+    text-shadow:
+        0 0 5px #0ff,
+        0 0 10px #0ff;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #ff00ff;
+    color: #000;
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff;
+    transform: scale(1.1);
+}
+
+/* Animação de flicker LED */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {opacity: 1;}
+    20%, 22%, 24%, 55% {opacity: 0.4;}
+}
+
+/* Fundo animado tipo luzes piscando */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #0ff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0.3;}
+}
+</style>
 </head>
 <body>
-    <div>
-        <h1>Bem-vindo à Página Restrita!</h1>
-        <p>Você acessou com sucesso após digitar a senha correta.</p>
-        <button onclick="window.close()">Fechar aba</button>
-    </div>
+<div class="container">
+    <h1>ACESSO LIBERADO</h1>
+    <p>Bem-vindo à Área Restrita LED!</p>
+    <button onclick="window.close()">Fechar aba</button>
+</div>
+
+<script>
+// Cria várias "estrelas" piscando no fundo
+for(let i=0; i<50; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.top = Math.random()*100 + 'vh';
+    star.style.left = Math.random()*100 + 'vw';
+    star.style.width = Math.random()*3 + 1 + 'px';
+    star.style.height = star.style.width;
+    star.style.animationDuration = (Math.random()*3 + 2) + 's';
+    document.body.appendChild(star);
+}
+</script>
 </body>
 </html>
